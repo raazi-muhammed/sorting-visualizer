@@ -1,0 +1,15 @@
+$primary-color: green;
+
+.graph {
+	display: flex;
+	align-items: end;
+	gap: 2px;
+	max-width: 100vw;
+
+	&--bar {
+		background-color: $primary-color;
+		display: flex;
+		padding: 0.2rem;
+		align-items: end;
+	}
+}
