@@ -4,7 +4,7 @@ function App() {
 	return (
 		<>
 			<header>
-				<h5>Sorting visualizer</h5>
+				<h5 style={{ textAlign: "center" }}>Sorting visualizer</h5>
 			</header>
 			<SortingVisualizer />
 		</>

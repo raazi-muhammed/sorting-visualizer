@@ -1,4 +1,7 @@
-$primary-color: green;
+$color-primary: #491c7f;
+$color-primary-500: #491c7f67;
+$color-accent: #883ebb;
+$color-accent-500: #893ebb7e;
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -27,9 +30,19 @@ body {
 	outline: none;
 	border: none;
 	padding-inline: 1rem;
+	background-color: $color-primary;
 	transition: 0.5s;
 
+	display: flex;
+	gap: 0.5rem;
+
 	&:hover {
-		background-color: $primary-color;
+		background-color: $color-accent;
 	}
+}
+
+.top-section {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
 }
