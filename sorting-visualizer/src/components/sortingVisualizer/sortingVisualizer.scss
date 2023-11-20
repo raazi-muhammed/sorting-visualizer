@@ -5,6 +5,9 @@ $primary-color: green;
 	align-items: end;
 	gap: 2px;
 	max-width: 100vw;
+	height: 80vh;
+
+	margin-top: 1rem;
 
 	&--bar {
 		background-color: $primary-color;
@@ -12,4 +15,8 @@ $primary-color: green;
 		padding: 0.2rem;
 		align-items: end;
 	}
+}
+
+.bg-red {
+	background-color: red;
 }
