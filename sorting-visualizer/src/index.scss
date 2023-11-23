@@ -2,6 +2,7 @@ $color-primary: #491c7f;
 $color-primary-500: #491c7f67;
 $color-accent: #883ebb;
 $color-accent-500: #893ebb7e;
+$border-radius: 0.75rem;
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -26,7 +27,7 @@ body {
 
 .btn {
 	padding: 0.65rem;
-	border-radius: 0.75rem;
+	border-radius: $border-radius;
 	outline: none;
 	border: none;
 	padding-inline: 1rem;
@@ -41,8 +42,54 @@ body {
 	}
 }
 
+.input {
+	&--box {
+		padding: 0.5rem;
+		border-radius: $border-radius;
+		border: none;
+		background-color: transparent;
+	}
+	&--label {
+		font-size: 0.75rem;
+	}
+}
+
 .top-section {
 	display: flex;
 	justify-content: center;
 	gap: 1rem;
+}
+
+input[type="range"] {
+	height: 10px;
+	width: 100%;
+	-webkit-appearance: none;
+	outline: none;
+	background-color: $color-primary;
+	border-radius: $border-radius;
+}
+
+input[type="range"]::-ms-thumb {
+	height: 1rem;
+	width: 1rem;
+	border-radius: $border-radius;
+	background: $color-accent;
+	cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+	height: 1rem;
+	width: 1rem;
+	border-radius: $border-radius;
+	background: $color-accent;
+	cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	height: 1rem;
+	width: 1rem;
+	border-radius: $border-radius;
+	background: $color-accent;
+	cursor: pointer;
+	-webkit-appearance: none;
 }
