@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./sortingVisualizer.scss";
 import ResetIcon from "../../assets/icons/ResetIcon";
-import SortIcon from "../../assets/icons/SortIcon";
+import BubbleSort from "../sortingAlgorithms/BubbleSort";
 
 const SortingVisualizer = () => {
 	const [arrayValues, setArrayValues] = useState<number[]>([]);
@@ -20,6 +20,7 @@ const SortingVisualizer = () => {
 		for (let i = 0; i < ARRAY_LENGTH; i++) {
 			randomArr.push(Math.floor(Math.random() * MAX_VALUE) + BASE_VALUE);
 		}
+
 		setArrayValues(randomArr);
 		setComparing([]);
 		setSwitching([]);
@@ -28,49 +29,16 @@ const SortingVisualizer = () => {
 		randomizeArray();
 	}, [arrayLength]);
 
-	const handleBubbleSortArray = () => {
-		const bubbleSort = async (arr: number[]) => {
-			let isItemsSwapped;
-			let count = arr.length - 1;
-			do {
-				isItemsSwapped = false;
-				for (let i = 0; i < count; i++) {
-					setSwitching([]);
-					if (arr[i] > arr[i + 1]) {
-						isItemsSwapped = true;
-						setSwitching([i, i + 1]);
-						await new Promise((resolve) => setTimeout(resolve, delay / 2));
-						let temp = arr[i];
-						arr[i] = arr[i + 1];
-						arr[i + 1] = temp;
-					}
-					setComparing([i, i + 1]);
-					setArrayValues(arr);
-					await new Promise((resolve) => setTimeout(resolve, delay));
-				}
-				count--;
-			} while (isItemsSwapped);
-
-			setArrayValues(arr);
-			setComparing([]);
-			setSwitching([]);
-			return arr;
-		}; // O(n^2)
-
-		bubbleSort(arrayValues);
-	};
-
 	return (
 		<main>
 			<section className="top-section">
-				<button
-					onClick={() => {
-						handleBubbleSortArray();
-					}}
-					className="btn">
-					<SortIcon />
-					Bubble Sort
-				</button>
+				<BubbleSort
+					setComparing={setComparing}
+					arrayValues={arrayValues}
+					delay={delay}
+					setArrayValues={setArrayValues}
+					setSwitching={setSwitching}
+				/>
 				<button onClick={randomizeArray} className="btn">
 					<ResetIcon />
 				</button>
@@ -94,6 +62,8 @@ const SortingVisualizer = () => {
 			<aside style={{ position: "absolute", right: "2rem", top: "2rem" }}>
 				<section>
 					<input
+						min={1}
+						max={1000}
 						value={delay}
 						onChange={(e) => setDelay(Number(e.target.value))}
 						type="number"
@@ -110,6 +80,8 @@ const SortingVisualizer = () => {
 				</section>
 				<section>
 					<input
+						min={5}
+						max={100}
 						value={arrayLength}
 						onChange={(e) => setArrayLength(Number(e.target.value))}
 						type="number"
