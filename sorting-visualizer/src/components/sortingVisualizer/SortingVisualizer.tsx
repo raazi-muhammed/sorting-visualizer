@@ -4,12 +4,13 @@ import ResetIcon from "../../assets/icons/ResetIcon";
 import BubbleSort from "../sortingAlgorithms/BubbleSort";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { changeDelay, changeSize } from "../../app/features/configSlice";
-import { changeArray } from "../../app/features/numbersSlice";
+import {
+	changeArray,
+	changeComparing,
+	changeSwitching,
+} from "../../app/features/numbersSlice";
 
 const SortingVisualizer = () => {
-	const [comparing, setComparing] = useState<number[]>([]);
-	const [switching, setSwitching] = useState<number[]>([]);
-
 	const config = useAppSelector((state) => state.config);
 	const numbers = useAppSelector((state) => state.numbers);
 	const dispatch = useAppDispatch();
@@ -26,8 +27,8 @@ const SortingVisualizer = () => {
 		}
 
 		dispatch(changeArray(randomArr));
-		setComparing([]);
-		setSwitching([]);
+		dispatch(changeComparing([]));
+		dispatch(changeSwitching([]));
 	};
 
 	useEffect(() => {
@@ -37,7 +38,7 @@ const SortingVisualizer = () => {
 	return (
 		<main>
 			<section className="top-section">
-				<BubbleSort setComparing={setComparing} setSwitching={setSwitching} />
+				<BubbleSort />
 				<button onClick={randomizeArray} className="btn">
 					<ResetIcon />
 				</button>
@@ -48,9 +49,9 @@ const SortingVisualizer = () => {
 						key={i}
 						style={{ height: `${val / 10}%` }}
 						className={`graph--bar ${
-							switching.includes(i)
+							numbers?.switching.includes(i)
 								? "bar--danger"
-								: comparing.includes(i)
+								: numbers?.comparing.includes(i)
 								? "bar--accent"
 								: ""
 						}`}>
