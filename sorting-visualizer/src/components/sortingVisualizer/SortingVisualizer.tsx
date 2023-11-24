@@ -9,6 +9,7 @@ import {
 	changeComparing,
 	changeSwitching,
 } from "../../app/features/numbersSlice";
+import InsertionSort from "../sortingAlgorithms/InsertionSort";
 
 const SortingVisualizer = () => {
 	const config = useAppSelector((state) => state.config);
@@ -38,6 +39,7 @@ const SortingVisualizer = () => {
 	return (
 		<main>
 			<section className="top-section">
+				<InsertionSort/>
 				<BubbleSort />
 				<button onClick={randomizeArray} className="btn">
 					<ResetIcon />
@@ -65,8 +67,8 @@ const SortingVisualizer = () => {
 						Delay:
 					</label>
 					<input
-						min={5}
-						max={100}
+						min={1}
+						max={1000}
 						step={10}
 						className="input--box"
 						id="delay"
@@ -76,8 +78,8 @@ const SortingVisualizer = () => {
 					/>
 					<br />
 					<input
-						min={5}
-						max={100}
+						min={1}
+						max={1000}
 						step={10}
 						value={config?.delay}
 						onChange={(e) => dispatch(changeDelay(Number(e.target.value)))}
