@@ -12,7 +12,7 @@ const InsertionsSort = () => {
   const numbers = useAppSelector((state) => state.numbers);
   const dispatch = useAppDispatch();
 
-  const handleInsertionSortArray = async () => {
+  const handleSortArray = async () => {
     let array = [...numbers?.originalArray];
 
     for (let i = 1; i < array.length; i++) {
@@ -49,7 +49,7 @@ const InsertionsSort = () => {
     <div>
       <button
         onClick={() => {
-          handleInsertionSortArray();
+          handleSortArray();
         }}
         className="btn"
       >
