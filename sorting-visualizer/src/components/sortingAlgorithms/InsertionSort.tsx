@@ -1,21 +1,27 @@
 import { useSelector } from "react-redux";
-import SortIcon from "../../assets/icons/SortIcon";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   changeArray,
   changeComparing,
   changeSwitching,
 } from "../../app/features/numbersSlice";
+import { BsSortDownAlt } from "react-icons/bs";
 
-const InsertionsSort = () => {
+type SelectionSort = {
+  isSortingStopped: React.MutableRefObject<boolean>;
+};
+
+const InsertionsSort = ({ isSortingStopped }: SelectionSort) => {
   const config = useSelector((state: any) => state.config);
   const numbers = useAppSelector((state) => state.numbers);
   const dispatch = useAppDispatch();
 
   const handleSortArray = async () => {
+    isSortingStopped.current = false;
     let array = [...numbers?.originalArray];
 
     for (let i = 1; i < array.length; i++) {
+      if (isSortingStopped.current) break;
       let numberToInsert = array[i];
       let j = i - 1;
 
@@ -23,6 +29,8 @@ const InsertionsSort = () => {
 
       dispatch(changeComparing([i, j]));
       while (array[j] > numberToInsert && j >= 0) {
+        if (isSortingStopped.current) break;
+
         array[j + 1] = array[j];
         dispatch(changeComparing([i, j]));
         await new Promise((resolve) => setTimeout(resolve, config.delay));
@@ -53,7 +61,7 @@ const InsertionsSort = () => {
         }}
         className="btn"
       >
-        <SortIcon />
+        <BsSortDownAlt size="1.5em" />
         Insertion Sort
       </button>
     </div>

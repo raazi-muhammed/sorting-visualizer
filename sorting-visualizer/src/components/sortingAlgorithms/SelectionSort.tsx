@@ -1,26 +1,35 @@
 import { useSelector } from "react-redux";
-import SortIcon from "../../assets/icons/SortIcon";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   changeArray,
   changeComparing,
   changeSwitching,
 } from "../../app/features/numbersSlice";
+import { BsSortDownAlt } from "react-icons/bs";
 
-const SelectionSort = () => {
+type SelectionSort = {
+  isSortingStopped: React.MutableRefObject<boolean>;
+};
+
+const SelectionSort = ({ isSortingStopped }: SelectionSort) => {
   const config = useSelector((state: any) => state.config);
   const numbers = useAppSelector((state) => state.numbers);
   const dispatch = useAppDispatch();
 
   const handleSortArray = async () => {
+    isSortingStopped.current = false;
     let arr = [...numbers?.originalArray];
 
     for (let i = 0; i < arr.length - 1; i++) {
+      if (isSortingStopped.current) break;
+
       let j = i + 1;
       let smallest = arr[i];
       let smallestIdx = i;
 
       while (j < arr.length) {
+        if (isSortingStopped.current) break;
+
         if (arr[j] < smallest) {
           dispatch(changeSwitching([j, i]));
           smallest = arr[j];
@@ -51,7 +60,7 @@ const SelectionSort = () => {
         }}
         className="btn"
       >
-        <SortIcon />
+        <BsSortDownAlt size="1.5em" />
         Selection Sort
       </button>
     </div>

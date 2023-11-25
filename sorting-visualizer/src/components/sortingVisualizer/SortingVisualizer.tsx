@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./sortingVisualizer.scss";
-import ResetIcon from "../../assets/icons/ResetIcon";
 import BubbleSort from "../sortingAlgorithms/BubbleSort";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { changeDelay, changeSize } from "../../app/features/configSlice";
@@ -11,11 +10,14 @@ import {
 } from "../../app/features/numbersSlice";
 import InsertionSort from "../sortingAlgorithms/InsertionSort";
 import SelectionSort from "../sortingAlgorithms/SelectionSort";
+import { RiStopLine } from "react-icons/ri";
+import { GrPowerReset } from "react-icons/gr";
 
 const SortingVisualizer = () => {
   const config = useAppSelector((state) => state.config);
   const numbers = useAppSelector((state) => state.numbers);
   const dispatch = useAppDispatch();
+  const isSortingStopped = useRef(false);
 
   const randomizeArray = (): void => {
     const BASE_VALUE = 10;
@@ -33,6 +35,10 @@ const SortingVisualizer = () => {
     dispatch(changeSwitching([]));
   };
 
+  const handleStop = () => {
+    isSortingStopped.current = true;
+  };
+
   useEffect(() => {
     randomizeArray();
   }, [config.size]);
@@ -40,11 +46,14 @@ const SortingVisualizer = () => {
   return (
     <main>
       <section className="top-section">
-        <InsertionSort />
-        <BubbleSort />
-        <SelectionSort />
-        <button onClick={randomizeArray} className="btn">
-          <ResetIcon />
+        <InsertionSort isSortingStopped={isSortingStopped} />
+        <BubbleSort isSortingStopped={isSortingStopped} />
+        <SelectionSort isSortingStopped={isSortingStopped} />
+        <button onClick={randomizeArray} className="btn btn--icon">
+          <GrPowerReset size="1.5em" />
+        </button>
+        <button onClick={handleStop} className="btn btn--icon">
+          <RiStopLine size="1.8em" />
         </button>
       </section>
       <section className="graph">
