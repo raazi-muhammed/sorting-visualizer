@@ -4,47 +4,50 @@ $color-accent: #d18bff;
 $color-accent-500: #893ebb7e;
 
 .graph {
-	display: flex;
-	align-items: end;
-	gap: 6px;
-	width: min(100vw, 70rem);
+  display: flex;
+  justify-content: center;
+  align-items: end;
 
-	height: 80vh;
-	margin-top: 1rem;
+  gap: 6px;
+  padding-inline: 4rem;
 
-	&--bar {
-		background-color: $color-primary-500;
+  height: 70vh;
+  margin-top: 4rem;
 
-		border: 4px solid $color-primary;
-		border-radius: 4px;
+  &--bar {
+    background-color: $color-primary-500;
 
-		display: flex;
-		justify-content: center;
-		width: 100%;
+    border: 4px solid $color-primary;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 3rem;
 
-		align-items: end;
+    display: flex;
+    justify-content: center;
 
-		position: relative;
+    align-items: end;
 
-		transition: transform 0.2s;
-	}
-	&--text {
-		color: $color-accent;
-		text-align: center;
-		font-size: 0.5rem;
-		position: absolute;
-		bottom: -2rem;
-	}
+    position: relative;
+
+    transition: transform 0.2s;
+  }
+  &--text {
+    color: $color-accent;
+    text-align: center;
+    font-size: 0.5rem;
+    position: absolute;
+    bottom: -2rem;
+  }
 }
 
 .bar--accent {
-	background-color: $color-accent-500;
-	border: 4px solid $color-accent;
-	transform: scale(1.035);
+  background-color: $color-accent-500;
+  border: 4px solid $color-accent;
+  transform: scale(1.035);
 }
 
 .bar--danger {
-	background-color: $color-accent-500;
-	border: 4px solid rgb(147, 0, 0);
-	transform: scale(1.035);
+  background-color: $color-accent-500;
+  border: 4px solid rgb(147, 0, 0);
+  transform: scale(1.035);
 }

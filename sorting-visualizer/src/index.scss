@@ -3,6 +3,8 @@ $color-primary-500: #491c7f67;
 $color-accent: #883ebb;
 $color-accent-500: #893ebb7e;
 $border-radius: 0.75rem;
+$color-bg: #181818;
+$color-bg-500: #1c1c1c;
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -11,7 +13,7 @@ $border-radius: 0.75rem;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: $color-bg;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,9 +22,12 @@ $border-radius: 0.75rem;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  width: 100vw;
 }
 
 .btn {
@@ -49,9 +54,29 @@ body {
     transform: scale(1.05);
   }
 
+  &--accent {
+    background-color: transparent;
+  }
+
   &--icon {
     width: 2.5rem;
     padding-inline: 0;
+  }
+}
+
+.aside-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 100vh;
+  min-width: 15rem;
+  padding: 2rem;
+
+  background-color: $color-bg-500;
+
+  &--close {
+    margin-left: auto;
   }
 }
 
@@ -69,8 +94,25 @@ body {
 
 .top-section {
   display: flex;
+  padding-inline: 1rem;
+
   justify-content: center;
+
   gap: 1rem;
+
+  &--controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &--aside {
+    margin-left: auto;
+    top: 1rem;
+    right: 2rem;
+    position: absolute;
+  }
 }
 
 input[type="range"] {

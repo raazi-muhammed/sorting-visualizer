@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./sortingVisualizer.scss";
 import BubbleSort from "../sortingAlgorithms/BubbleSort";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { changeDelay, changeSize } from "../../app/features/configSlice";
+
 import {
   changeArray,
   changeComparing,
@@ -12,12 +12,15 @@ import InsertionSort from "../sortingAlgorithms/InsertionSort";
 import SelectionSort from "../sortingAlgorithms/SelectionSort";
 import { RiStopLine } from "react-icons/ri";
 import { GrPowerReset } from "react-icons/gr";
+import { SlSettings } from "react-icons/sl";
+import SettingsPanel from "../settings/SettingsPanel";
 
 const SortingVisualizer = () => {
   const config = useAppSelector((state) => state.config);
   const numbers = useAppSelector((state) => state.numbers);
   const dispatch = useAppDispatch();
   const isSortingStopped = useRef(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const randomizeArray = (): void => {
     const BASE_VALUE = 10;
@@ -44,17 +47,27 @@ const SortingVisualizer = () => {
   }, [config.size]);
 
   return (
-    <main>
+    <main style={{ width: "100vw" }}>
       <section className="top-section">
-        <InsertionSort isSortingStopped={isSortingStopped} />
-        <BubbleSort isSortingStopped={isSortingStopped} />
-        <SelectionSort isSortingStopped={isSortingStopped} />
-        <button onClick={randomizeArray} className="btn btn--icon">
-          <GrPowerReset size="1.5em" />
-        </button>
-        <button onClick={handleStop} className="btn btn--icon">
-          <RiStopLine size="1.8em" />
-        </button>
+        <section className="top-section--controls">
+          <InsertionSort isSortingStopped={isSortingStopped} />
+          <BubbleSort isSortingStopped={isSortingStopped} />
+          <SelectionSort isSortingStopped={isSortingStopped} />
+          <button onClick={randomizeArray} className="btn btn--icon">
+            <GrPowerReset size="1.5em" />
+          </button>
+          <button onClick={handleStop} className="btn btn--icon">
+            <RiStopLine size="1.8em" />
+          </button>
+        </section>
+        <section className="top-section--aside">
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="btn btn--accent"
+          >
+            <SlSettings />
+          </button>
+        </section>
       </section>
       <section className="graph">
         {numbers.originalArray.map((val, i) => (
@@ -73,58 +86,9 @@ const SortingVisualizer = () => {
           </div>
         ))}
       </section>
-      <aside style={{ position: "absolute", right: "2rem", top: "2rem" }}>
-        <section>
-          <label className="input--label" htmlFor="delay">
-            Delay:
-          </label>
-          <input
-            min={0}
-            max={1000}
-            step={10}
-            className="input--box"
-            id="delay"
-            value={config?.delay}
-            onChange={(e) => dispatch(changeDelay(Number(e.target.value)))}
-            type="number"
-          />
-          <br />
-          <input
-            min={0}
-            max={1000}
-            step={10}
-            value={config?.delay}
-            onChange={(e) => dispatch(changeDelay(Number(e.target.value)))}
-            type="range"
-            className="slider"
-          />
-        </section>
-        <section>
-          <label className="input--label" htmlFor="size">
-            Size:
-          </label>
-          <input
-            id="size"
-            className="input--box"
-            min={5}
-            step={10}
-            max={100}
-            value={config?.size}
-            onChange={(e) => dispatch(changeSize(Number(e.target.value)))}
-            type="number"
-          />
-          <br />
-          <input
-            min={5}
-            max={100}
-            step={10}
-            value={config?.size}
-            onChange={(e) => dispatch(changeSize(Number(e.target.value)))}
-            type="range"
-            className="slider"
-          />
-        </section>
-      </aside>
+      {showSettings ? (
+        <SettingsPanel setShowSettings={setShowSettings} />
+      ) : null}
     </main>
   );
 };
