@@ -15,6 +15,7 @@ import { GrPowerReset } from "react-icons/gr";
 import { SlSettings } from "react-icons/sl";
 import SettingsPanel from "../settings/SettingsPanel";
 import QuickSort from "../sortingAlgorithms/QuickSort";
+import MergeSort from "../sortingAlgorithms/MergeSort";
 
 const SortingVisualizer = () => {
   const config = useAppSelector((state) => state.config);
@@ -55,6 +56,7 @@ const SortingVisualizer = () => {
           <BubbleSort isSortingStopped={isSortingStopped} />
           <SelectionSort isSortingStopped={isSortingStopped} />
           <QuickSort isSortingStopped={isSortingStopped} />
+          <MergeSort isSortingStopped={isSortingStopped} />
           <button onClick={randomizeArray} className="btn btn--icon">
             <GrPowerReset size="1.5em" />
           </button>
