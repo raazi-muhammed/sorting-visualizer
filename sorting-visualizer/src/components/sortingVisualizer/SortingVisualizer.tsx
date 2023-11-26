@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import "./_sortingVisualizer.scss";
 import BubbleSort from "../sortingAlgorithms/BubbleSort";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-
 import {
   changeArray,
   changeComparing,
@@ -16,29 +15,41 @@ import { SlSettings } from "react-icons/sl";
 import SettingsPanel from "../settings/SettingsPanel";
 import QuickSort from "../sortingAlgorithms/QuickSort";
 import MergeSort from "../sortingAlgorithms/MergeSort";
+import DescriptionInfo from "./DescriptionInfo";
+import SortGraph from "./SortGraph";
+
+type DescriptionState = {
+  heading: string;
+  body: string;
+};
 
 const SortingVisualizer = () => {
   const config = useAppSelector((state) => state.config);
-  const numbers = useAppSelector((state) => state.numbers);
   const dispatch = useAppDispatch();
   const isSortingStopped = useRef(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [description, setDescription] = useState({
+  const [description, setDescription] = useState<DescriptionState>({
     heading: "",
     body: "Select an algorithm to show description",
   });
-  const randomizeArray = (): void => {
+
+  const getRandomArray = (): number[] => {
     const BASE_VALUE = 10;
     const MAX_VALUE = 1000;
     const ARRAY_LENGTH = config?.size;
 
-    let randomArr: number[] = [];
+    let array: number[] = [];
 
     for (let i = 0; i < ARRAY_LENGTH; i++) {
-      randomArr.push(Math.floor(Math.random() * MAX_VALUE) + BASE_VALUE);
+      array.push(Math.floor(Math.random() * MAX_VALUE) + BASE_VALUE);
     }
 
-    dispatch(changeArray(randomArr));
+    return array;
+  };
+
+  const handleRandomClicked = (): void => {
+    const array = getRandomArray();
+    dispatch(changeArray(array));
     dispatch(changeComparing([]));
     dispatch(changeSwitching([]));
   };
@@ -55,9 +66,12 @@ const SortingVisualizer = () => {
     MERGE = "MERGE",
   }
 
+  const [currentType, setCurrentType] = useState(SortType.INSERTION);
+
   const handleDescription = (sortType: SortType) => {
     switch (sortType) {
       case SortType.INSERTION:
+        setCurrentType(SortType.INSERTION);
         setDescription({
           heading: "Insertion Sort",
           body: "O(n^2), Ω(n), Θ(n^2)",
@@ -65,24 +79,28 @@ const SortingVisualizer = () => {
         break;
 
       case SortType.BUBBLE:
+        setCurrentType(SortType.BUBBLE);
         setDescription({
           heading: "Bubble Sort",
           body: "O(n^2), Ω(n), Θ(n^2)",
         });
         break;
       case SortType.SELECTION:
+        setCurrentType(SortType.SELECTION);
         setDescription({
           heading: "Selection Sort",
           body: "O(n^2), Ω(n^2), Θ(n^2)",
         });
         break;
       case SortType.QUICK:
+        setCurrentType(SortType.QUICK);
         setDescription({
           heading: "Quick Sort",
           body: "O(n^2) (rare), Ω(n log n), Θ(n log n)",
         });
         break;
       case SortType.MERGE:
+        setCurrentType(SortType.MERGE);
         setDescription({
           heading: "Merge Sort",
           body: "O(n log n), Ω(n log n), Θ(n log n)",
@@ -95,7 +113,7 @@ const SortingVisualizer = () => {
   };
 
   useEffect(() => {
-    randomizeArray();
+    handleRandomClicked();
   }, [config.size]);
 
   return (
@@ -124,7 +142,7 @@ const SortingVisualizer = () => {
           <section onClick={() => handleDescription(SortType.MERGE)}>
             <MergeSort isSortingStopped={isSortingStopped} />
           </section>
-          <button onClick={randomizeArray} className="btn btn--icon">
+          <button onClick={handleRandomClicked} className="btn btn--icon">
             <GrPowerReset size="1.5em" />
           </button>
           <button onClick={handleStop} className="btn btn--icon">
@@ -140,31 +158,8 @@ const SortingVisualizer = () => {
           </button>
         </section>
       </section>
-      <section>
-        <p className="text text--heading">{description.heading}</p>
-        <p className="text text--description">
-          Time Complexity: {description.body}
-        </p>
-      </section>
-      <section className="graph">
-        {numbers.originalArray.map((val, i) => (
-          <div
-            key={i}
-            style={{
-              height: `${(val / Math.max(...numbers.originalArray)) * 100}%`,
-            }}
-            className={`graph--bar ${
-              numbers?.switching.includes(i)
-                ? "bar--danger"
-                : numbers?.comparing.includes(i)
-                ? "bar--accent"
-                : ""
-            }`}
-          >
-            <p className="graph--text">{val}</p>
-          </div>
-        ))}
-      </section>
+      <DescriptionInfo currentType={currentType} description={description} />
+      <SortGraph />
       {showSettings ? (
         <SettingsPanel setShowSettings={setShowSettings} />
       ) : null}

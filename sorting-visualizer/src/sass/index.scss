@@ -3,6 +3,7 @@
 
 *::selection {
   background: var(--color-accent);
+  color: white;
 }
 
 :root {
@@ -48,4 +49,10 @@ body {
     right: 2rem;
     position: absolute;
   }
+}
+
+.d-flex-mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

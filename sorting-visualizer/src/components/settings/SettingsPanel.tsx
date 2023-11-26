@@ -75,7 +75,7 @@ const SettingsPanel = ({ setShowSettings }: SettingsPanel) => {
           className="slider"
         />
       </section>
-      <h3 className="aside-panel--heading">Custom Array</h3>
+      <h3 className="aside-panel--heading">Input</h3>
       <CustomNumbers />
       <p className="sub-text">Change device theme to change theme</p>
     </aside>
