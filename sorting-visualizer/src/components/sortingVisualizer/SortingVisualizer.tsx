@@ -23,7 +23,10 @@ const SortingVisualizer = () => {
   const dispatch = useAppDispatch();
   const isSortingStopped = useRef(false);
   const [showSettings, setShowSettings] = useState(false);
-
+  const [description, setDescription] = useState({
+    heading: "",
+    body: "Select an algorithm to show description",
+  });
   const randomizeArray = (): void => {
     const BASE_VALUE = 10;
     const MAX_VALUE = 1000;
@@ -44,6 +47,53 @@ const SortingVisualizer = () => {
     isSortingStopped.current = true;
   };
 
+  enum SortType {
+    INSERTION = "INSERTION",
+    BUBBLE = "BUBBLE",
+    SELECTION = "SELECTION",
+    QUICK = "QUICK",
+    MERGE = "MERGE",
+  }
+
+  const handleDescription = (sortType: SortType) => {
+    switch (sortType) {
+      case SortType.INSERTION:
+        setDescription({
+          heading: "Insertion Sort",
+          body: "O(n^2), Ω(n), Θ(n^2)",
+        });
+        break;
+
+      case SortType.BUBBLE:
+        setDescription({
+          heading: "Bubble Sort",
+          body: "O(n^2), Ω(n), Θ(n^2)",
+        });
+        break;
+      case SortType.SELECTION:
+        setDescription({
+          heading: "Selection Sort",
+          body: "O(n^2), Ω(n^2), Θ(n^2)",
+        });
+        break;
+      case SortType.QUICK:
+        setDescription({
+          heading: "Quick Sort",
+          body: "O(n^2) (rare), Ω(n log n), Θ(n log n)",
+        });
+        break;
+      case SortType.MERGE:
+        setDescription({
+          heading: "Merge Sort",
+          body: "O(n log n), Ω(n log n), Θ(n log n)",
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     randomizeArray();
   }, [config.size]);
@@ -59,11 +109,21 @@ const SortingVisualizer = () => {
     >
       <section className="top-section">
         <section className="top-section--controls">
-          <InsertionSort isSortingStopped={isSortingStopped} />
-          <BubbleSort isSortingStopped={isSortingStopped} />
-          <SelectionSort isSortingStopped={isSortingStopped} />
-          <QuickSort isSortingStopped={isSortingStopped} />
-          <MergeSort isSortingStopped={isSortingStopped} />
+          <section onClick={() => handleDescription(SortType.INSERTION)}>
+            <InsertionSort isSortingStopped={isSortingStopped} />
+          </section>
+          <section onClick={() => handleDescription(SortType.BUBBLE)}>
+            <BubbleSort isSortingStopped={isSortingStopped} />
+          </section>
+          <section onClick={() => handleDescription(SortType.SELECTION)}>
+            <SelectionSort isSortingStopped={isSortingStopped} />
+          </section>
+          <section onClick={() => handleDescription(SortType.QUICK)}>
+            <QuickSort isSortingStopped={isSortingStopped} />
+          </section>
+          <section onClick={() => handleDescription(SortType.MERGE)}>
+            <MergeSort isSortingStopped={isSortingStopped} />
+          </section>
           <button onClick={randomizeArray} className="btn btn--icon">
             <GrPowerReset size="1.5em" />
           </button>
@@ -79,6 +139,12 @@ const SortingVisualizer = () => {
             <SlSettings />
           </button>
         </section>
+      </section>
+      <section>
+        <p className="text text--heading">{description.heading}</p>
+        <p className="text text--description">
+          Time Complexity: {description.body}
+        </p>
       </section>
       <section className="graph">
         {numbers.originalArray.map((val, i) => (
