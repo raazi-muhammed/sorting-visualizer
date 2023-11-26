@@ -25,8 +25,7 @@ const QuickSort = ({ isSortingStopped }: QuickSort) => {
       let temp = array[i];
       array[i] = array[j];
       array[j] = temp;
-      await new Promise((resolve) => setTimeout(resolve, config.delay));
-      dispatch(changeSwitching([]));
+      await new Promise((resolve) => setTimeout(resolve, config.delay / 2));
     };
 
     const quickSortIndexHelper = async (
@@ -44,8 +43,6 @@ const QuickSort = ({ isSortingStopped }: QuickSort) => {
         if (isSortingStopped.current) break;
         dispatch(changeComparing([leftIdx, rightIdx]));
 
-        await new Promise((resolve) => setTimeout(resolve, config.delay));
-
         if (
           array[leftIdx] > array[pivotIdx] &&
           array[rightIdx] < array[pivotIdx]
@@ -59,17 +56,16 @@ const QuickSort = ({ isSortingStopped }: QuickSort) => {
         if (array[rightIdx] >= array[pivotIdx]) rightIdx--;
         await new Promise((resolve) => setTimeout(resolve, config.delay));
         dispatch(changeArray([...array]));
+        dispatch(changeSwitching([]));
       }
 
       swap(array, rightIdx, pivotIdx);
 
-      quickSortIndexHelper(array, startIdx, rightIdx - 1);
-      quickSortIndexHelper(array, rightIdx + 1, endIdx);
-
-      dispatch(changeComparing([]));
+      await quickSortIndexHelper(array, startIdx, rightIdx - 1);
+      await quickSortIndexHelper(array, rightIdx + 1, endIdx);
     };
 
-    quickSortIndexHelper(array, 0, array.length - 1);
+    await quickSortIndexHelper(array, 0, array.length - 1);
 
     dispatch(changeArray([...array]));
     dispatch(changeComparing([]));

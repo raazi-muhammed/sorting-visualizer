@@ -49,7 +49,14 @@ const SortingVisualizer = () => {
   }, [config.size]);
 
   return (
-    <main style={{ width: "100vw" }}>
+    <main
+      style={{
+        width: "100vw",
+        height: "85vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <section className="top-section">
         <section className="top-section--controls">
           <InsertionSort isSortingStopped={isSortingStopped} />

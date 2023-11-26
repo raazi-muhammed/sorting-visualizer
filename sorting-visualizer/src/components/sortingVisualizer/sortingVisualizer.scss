@@ -8,10 +8,11 @@ $color-accent-500: #893ebb7e;
   justify-content: center;
   align-items: end;
 
+  flex-grow: 1;
+
   gap: 6px;
   padding-inline: 4rem;
 
-  height: 70vh;
   margin-top: 4rem;
 
   &--bar {

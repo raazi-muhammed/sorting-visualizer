@@ -21,6 +21,7 @@ const SettingsPanel = ({ setShowSettings }: SettingsPanel) => {
       >
         <IoClose size="1.4em" />
       </button>
+      <p>Settings</p>
       <section>
         <label className="input--label" htmlFor="delay">
           Delay:

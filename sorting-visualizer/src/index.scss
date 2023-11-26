@@ -6,6 +6,10 @@ $border-radius: 0.75rem;
 $color-bg: #181818;
 $color-bg-500: #1c1c1c;
 
+*::selection {
+  background: $color-accent;
+  color: white;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -72,11 +76,29 @@ body {
   height: 100vh;
   min-width: 15rem;
   padding: 2rem;
+  padding-top: 1rem;
 
-  background-color: $color-bg-500;
+  //background-color: $color-bg-500;
+  background-color: #1c1c1c62;
+
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 
   &--close {
     margin-left: auto;
+  }
+
+  animation: slide-in 0.5s;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0.2;
+    transform: translateX(20rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -85,6 +107,7 @@ body {
     padding: 0.5rem;
     border-radius: $border-radius;
     border: none;
+    outline-color: $color-accent;
     background-color: transparent;
   }
   &--label {
@@ -95,7 +118,6 @@ body {
 .top-section {
   display: flex;
   padding-inline: 1rem;
-
   justify-content: center;
 
   gap: 1rem;
