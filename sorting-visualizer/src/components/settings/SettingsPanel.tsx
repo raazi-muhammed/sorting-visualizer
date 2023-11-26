@@ -1,14 +1,12 @@
 import { changeDelay, changeSize } from "../../app/features/configSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { IoClose } from "react-icons/io5";
+import CustomNumbers from "./CustomNumbers";
+import "./_settingsPanel.scss";
 
 type SettingsPanel = {
   setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
 };
-enum Theme {
-  DARK = "DARK",
-  LIGHT = "LIGHT",
-}
 
 const SettingsPanel = ({ setShowSettings }: SettingsPanel) => {
   const config = useAppSelector((state) => state.config);
@@ -16,10 +14,6 @@ const SettingsPanel = ({ setShowSettings }: SettingsPanel) => {
 
   const handleClose = () => {
     setShowSettings(false);
-  };
-
-  const changeTheme = (theme: Theme) => {
-    console.log(theme);
   };
 
   return (
@@ -30,7 +24,7 @@ const SettingsPanel = ({ setShowSettings }: SettingsPanel) => {
       >
         <IoClose size="1.4em" />
       </button>
-      <h3>Settings</h3>
+      <h3 className="aside-panel--heading">Settings</h3>
       <section>
         <label className="input--label" htmlFor="delay">
           Delay:
@@ -81,6 +75,8 @@ const SettingsPanel = ({ setShowSettings }: SettingsPanel) => {
           className="slider"
         />
       </section>
+      <h3 className="aside-panel--heading">Custom Array</h3>
+      <CustomNumbers />
       <p className="sub-text">Change device theme to change theme</p>
     </aside>
   );

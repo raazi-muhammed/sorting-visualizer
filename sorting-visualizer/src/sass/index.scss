@@ -28,39 +28,6 @@ body {
   width: 100vw;
 }
 
-.aside-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  height: 100vh;
-  min-width: 15rem;
-  padding: 2rem;
-  padding-top: 1rem;
-
-  background-color: var(--color-bg-500);
-
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-
-  &--close {
-    margin-left: auto;
-  }
-
-  animation: slide-in 0.5s;
-}
-
-@keyframes slide-in {
-  0% {
-    opacity: 0.2;
-    transform: translateX(20rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .top-section {
   display: flex;
   padding-inline: 1rem;

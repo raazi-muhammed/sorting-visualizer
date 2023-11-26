@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./sortingVisualizer.scss";
+import "./_sortingVisualizer.scss";
 import BubbleSort from "../sortingAlgorithms/BubbleSort";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
@@ -84,7 +84,9 @@ const SortingVisualizer = () => {
         {numbers.originalArray.map((val, i) => (
           <div
             key={i}
-            style={{ height: `${val / 10}%` }}
+            style={{
+              height: `${(val / Math.max(...numbers.originalArray)) * 100}%`,
+            }}
             className={`graph--bar ${
               numbers?.switching.includes(i)
                 ? "bar--danger"
