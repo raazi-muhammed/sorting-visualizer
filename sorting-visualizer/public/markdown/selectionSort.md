@@ -1,30 +1,41 @@
 # Selection Sort Algorithm
 
-Selection Sort is a simple comparison-based sorting algorithm that works by dividing the input array into a sorted and an unsorted region. The algorithm repeatedly selects the smallest (or largest, depending on the order) element from the unsorted region and swaps it with the first element of the unsorted region.
+## Introduction
 
-## Algorithm Description
+Selection Sort is a simple sorting algorithm that works by repeatedly finding the minimum element from the unsorted part of the array and putting it at the beginning. The process is repeated for the remaining unsorted portion until the entire array is sorted.
 
-1. **Start:** The entire array is considered as an unsorted region.
+## Overview of Selection Sort
 
-2. **Find the minimum:** Iterate through the unsorted region to find the minimum (or maximum) element.
+The algorithm is named for its approach of selecting the minimum element in each pass.
 
-3. **Swap:** Swap the minimum element with the first element of the unsorted region.
+## Algorithm Steps
 
-4. **Update:** Move the boundary between the sorted and unsorted regions.
+1. **Selection of the Minimum Element:**
 
-5. **Repeat:** Repeat steps 2-4 until the entire array is sorted.
+    - Start with the first element as the minimum.
+    - Iterate through the unsorted part of the array to find the minimum element.
+    - Swap the minimum element with the first element.
+
+2. **Selection Sort Iteration:**
+
+    - Repeat the above process for the remaining unsorted portion.
+    - In each iteration, find the minimum element from the unsorted part and swap it with the first element of the remaining unsorted portion.
+
+3. **Repeat Until Sorted:**
+    - Continue the process until the entire array is sorted.
 
 ## Pseudocode
 
 ```plaintext
-for i from 0 to length of array - 1
-    minIndex = i
+function selectionSort(arr):
+    n = length(arr)
 
-    // Find the index of the minimum element in the unsorted region
-    for j from i+1 to length of array
-        if array[j] < array[minIndex]
-            minIndex = j
+    for i from 0 to n-1:
+        minIndex = i
 
-    // Swap the found minimum element with the first element of the unsorted region
-    swap array[i] with array[minIndex]
+        for j from i+1 to n-1:
+            if arr[j] < arr[minIndex]:
+                minIndex = j
+
+        swap(arr[i], arr[minIndex])
 ```

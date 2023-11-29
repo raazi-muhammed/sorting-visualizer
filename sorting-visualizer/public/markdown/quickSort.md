@@ -1,27 +1,47 @@
 # Quick Sort Algorithm
 
-Quick Sort is a divide-and-conquer algorithm that works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then recursively sorted.
+## Introduction
 
-## Algorithm Description
+Quick Sort is a divide-and-conquer sorting algorithm that works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
 
-1. **Partitioning:** Choose a pivot element from the array and partition the array into two sub-arrays: elements less than the pivot and elements greater than the pivot.
+## Overview of Quick Sort
 
-2. **Recursion:** Recursively apply the quicksort algorithm to the sub-arrays.
+The key to the efficiency of Quick Sort lies in the partitioning step, where elements smaller than the pivot are moved to one side, and elements greater than the pivot are moved to the other side.
+
+## Algorithm Steps
+
+1. **Choose a Pivot:**
+
+    - Select a pivot element from the array.
+
+2. **Partitioning:**
+
+    - Rearrange the array elements such that elements less than the pivot are on the left, and elements greater than the pivot are on the right.
+
+3. **Recursive Sorting:**
+    - Apply the same process recursively to the sub-arrays.
 
 ## Pseudocode
 
 ```plaintext
-function quickSort(array)
-    if length of array <= 1
-        return array
+function quickSort(arr, low, high):
+    if low < high:
+        # Find pivot such that elements smaller than pivot are on the left, and larger on the right
+        pivot = partition(arr, low, high)
 
-    pivot = choosePivot(array)
-    left = elements in array less than pivot
-    right = elements in array greater than pivot
+        # Recursively sort the sub-arrays
+        quickSort(arr, low, pivot - 1)
+        quickSort(arr, pivot + 1, high)
 
-    return concatenate(quickSort(left), pivot, quickSort(right))
+function partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
 
-function choosePivot(array)
-    // Various strategies for choosing the pivot
-    return someElementFrom(array)
+    for j from low to high-1:
+        if arr[j] <= pivot:
+            i = i + 1
+            swap(arr[i], arr[j])
+
+    swap(arr[i + 1], arr[high])
+    return i + 1
 ```

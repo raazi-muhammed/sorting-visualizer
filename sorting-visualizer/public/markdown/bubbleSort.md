@@ -1,22 +1,31 @@
 # Bubble Sort Algorithm
 
-Bubble Sort is a simple comparison-based sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
+## Introduction
 
-## Algorithm Description
+Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
 
-1. **Start:** Begin with the entire list considered as unsorted.
+## Overview of Bubble Sort
 
-2. **Comparison and Swap:** Compare adjacent elements in the list and swap them if they are in the wrong order.
+The algorithm gets its name because smaller elements "bubble" to the top of the list.
 
-3. **Passes:** Repeat the process for multiple passes until the list is sorted.
+## Algorithm Steps
 
-4. **Optimization:** Track whether any swaps were made during a pass. If no swaps were made, the list is already sorted, and the algorithm can terminate early.
+1. **Bubble Up:**
+
+    - Compare adjacent elements.
+    - Swap them if they are in the wrong order.
+
+2. **Iterative Passes:**
+    - Repeat the process for multiple passes until the entire list is sorted.
 
 ## Pseudocode
 
 ```plaintext
-for i from 0 to length of array - 1
-    for j from 0 to length of array - i - 1
-        if array[j] > array[j + 1]
-            swap array[j] with array[j + 1]
+function bubbleSort(arr):
+    n = length(arr)
+
+    for i from 0 to n-1:
+        for j from 0 to n-i-1:
+            if arr[j] > arr[j+1]:
+                swap(arr[j], arr[j+1])
 ```

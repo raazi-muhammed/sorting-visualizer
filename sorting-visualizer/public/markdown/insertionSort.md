@@ -1,37 +1,42 @@
 # Insertion Sort Algorithm
 
-Insertion Sort is a simple sorting algorithm that builds the final sorted array one element at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort. However, it has several advantages:
+## Introduction
 
-- Simple implementation
-- Efficient for small data sets or nearly sorted data
-- Adaptive, meaning it becomes more efficient if the data is partially ordered
+Insertion Sort is a simple sorting algorithm that builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort. However, it has some advantages, such as being very intuitive and easy to implement.
 
-## Algorithm Description
+## Overview of Insertion Sort
 
-The algorithm works by building a sorted portion of the array iteratively. At each iteration, an element is taken from the unsorted portion and inserted into its correct position in the sorted portion.
+Insertion Sort works by dividing the array into a sorted and an unsorted region. It repeatedly takes the first element from the unsorted region and inserts it into its correct position in the sorted region. This process is repeated until the entire array is sorted.
 
-1. **Start:** The first element is considered as a sorted portion.
+## Algorithm Steps
 
-2. **Iterate:** For each element in the unsorted portion:
+### Initialization
 
-   - Compare the current element with elements in the sorted portion.
-   - Move elements greater than the current element to the right.
-   - Insert the current element into its correct position.
+-   Start with the first element as the sorted region (considered sorted).
+-   The rest of the elements are in the unsorted region.
 
-3. **Repeat:** Repeat the process until the entire array is sorted.
+### Iterative Process
+
+1. Take an element from the unsorted region.
+2. Compare it with elements in the sorted region.
+3. Insert the element into its correct position in the sorted region.
+
+4. Repeat these steps until the entire array is sorted.
 
 ## Pseudocode
 
 ```plaintext
-for i from 1 to length of array
-    key = array[i]
-    j = i - 1
+function insertionSort(arr):
+    n = length(arr)
 
-    // Move elements of array[0..i-1] that are greater than key to one position ahead of their current position
-    while j >= 0 and array[j] > key
-        array[j + 1] = array[j]
-        j = j - 1
+    for i from 1 to n-1:
+        key = arr[i]
+        j = i - 1
 
-    // Place the key in its correct position
-    array[j + 1] = key
+        # Move elements of arr[0..i-1] that are greater than key to one position ahead
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j = j - 1
+
+        arr[j + 1] = key
 ```

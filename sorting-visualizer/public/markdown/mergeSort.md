@@ -1,39 +1,52 @@
 # Merge Sort Algorithm
 
-Merge Sort is a divide-and-conquer algorithm that divides the input array into two halves, recursively sorts each half, and then merges the sorted halves.
+## Introduction
 
-## Algorithm Description
+Merge Sort is an efficient, stable, and comparison-based sorting algorithm. It divides the array into two halves, recursively sorts each half, and then merges the sorted halves. The merge step is the key to its efficiency.
 
-1. **Divide:** Divide the unsorted list into n sub-lists, each containing one element.
+## Overview of Merge Sort
 
-2. **Conquer:** Recursively merge sub-lists to produce new sorted sub-lists until there is only one sub-list remaining.
+The algorithm follows the divide-and-conquer paradigm, breaking the problem into smaller sub-problems until they become simple enough to solve. The merge step combines the solutions to the sub-problems to produce the final sorted array.
 
-3. **Merge:** Merge the sorted sub-lists to produce the final sorted list.
+## Algorithm Steps
+
+1. **Divide:**
+
+    - Divide the unsorted array into two halves.
+
+2. **Conquer:**
+
+    - Recursively sort each half.
+
+3. **Merge:**
+    - Merge the sorted halves to produce a single sorted array.
 
 ## Pseudocode
 
 ```plaintext
-function mergeSort(array)
-    if length of array <= 1
-        return array
+function mergeSort(arr):
+    if length(arr) > 1:
+        mid = length(arr) / 2
+        leftHalf = arr[0:mid]
+        rightHalf = arr[mid:]
 
-    mid = length of array / 2
-    left = mergeSort(first half of array)
-    right = mergeSort(second half of array)
+        mergeSort(leftHalf)
+        mergeSort(rightHalf)
 
-    return merge(left, right)
+        merge(arr, leftHalf, rightHalf)
 
-function merge(left, right)
-    result = []
-    while left is not empty and right is not empty
-        if first element of left < first element of right
-            append first element of left to result
-        else
-            append first element of right to result
+function merge(arr, left, right):
+    i = j = k = 0
 
-    // Append remaining elements of left and right
-    append remaining elements of left to result
-    append remaining elements of right to result
+    while i < length(left) and j < length(right):
+        if left[i] <= right[j]:
+            arr[k] = left[i]
+            i = i + 1
+        else:
+            arr[k] = right[j]
+            j = j + 1
+        k = k + 1
 
-    return result
+    while i < length(left):
+        arr[k] = left[i
 ```

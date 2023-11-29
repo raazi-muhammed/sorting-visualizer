@@ -8,44 +8,44 @@ $color-primary-light: #7422d8;
 $color-primary-500-light: #7a38cbbb;
 $color-accent-light: #d18bff;
 $color-accent-500-light: #893ebb7e;
-$color-danger-light: rgb(227, 113, 113);
+$color-danger-light: #e37171;
 
 $border-radius: 0.75rem;
 
-$color-bg-light: rgb(255, 255, 255);
-$color-bg-500-light: rgba(241, 241, 241, 0.9);
+$color-bg-light: #ffffff;
+$color-bg-500-light: #f1f1f1e6;
 $color-fg-light: #181818;
 
 $color-bg-dark: #181818;
-$color-bg-500-dark: rgba(19, 19, 19, 0.9);
-$color-fg-dark: rgb(255, 255, 255);
+$color-bg-500-dark: #131313e6;
+$color-fg-dark: #ffffff;
 
 :root {
-  --color-bg: #{$color-bg-dark};
-  --color-bg-500: #{$color-bg-500-dark};
+    --color-bg: #{$color-bg-dark};
+    --color-bg-500: #{$color-bg-500-dark};
 
-  --color-fg: #{$color-fg-dark};
+    --color-fg: #{$color-fg-dark};
 
-  --color-primary: #{$color-primary-dark};
-  --color-primary-500: #{$color-primary-500-dark};
+    --color-primary: #{$color-primary-dark};
+    --color-primary-500: #{$color-primary-500-dark};
 
-  --color-accent: #{$color-accent-dark};
-  --color-accent-500: #{$color-accent-500-dark};
+    --color-accent: #{$color-accent-dark};
+    --color-accent-500: #{$color-accent-500-dark};
 
-  --color-danger: #{$color-danger-dark};
+    --color-danger: #{$color-danger-dark};
 
-  @media (prefers-color-scheme: light) {
-    --color-bg: #{$color-bg-light};
-    --color-bg-500: #{$color-bg-500-light};
+    @media (prefers-color-scheme: light) {
+        --color-bg: #{$color-bg-light};
+        --color-bg-500: #{$color-bg-500-light};
 
-    --color-fg: #{$color-fg-light};
+        --color-fg: #{$color-fg-light};
 
-    --color-primary: #{$color-primary-light};
-    --color-primary-500: #{$color-primary-500-light};
+        --color-primary: #{$color-primary-light};
+        --color-primary-500: #{$color-primary-500-light};
 
-    --color-accent: #{$color-accent-light};
-    --color-accent-500: #{$color-accent-500-light};
+        --color-accent: #{$color-accent-light};
+        --color-accent-500: #{$color-accent-500-light};
 
-    --color-danger: #{$color-danger-light};
-  }
+        --color-danger: #{$color-danger-light};
+    }
 }
