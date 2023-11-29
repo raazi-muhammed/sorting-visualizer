@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import "./_algorithmInfo.scss";
 import Markdown from "react-markdown";
 import { IoClose } from "react-icons/io5";
-
-enum SortType {
-    INSERTION = "INSERTION",
-    BUBBLE = "BUBBLE",
-    SELECTION = "SELECTION",
-    QUICK = "QUICK",
-    MERGE = "MERGE",
-}
+import SortType from "../../../constants/SortType";
 
 type AlgorithmInfo = {
     setShowInfo: React.Dispatch<React.SetStateAction<boolean>>;
