@@ -2,6 +2,7 @@ import { useState } from "react";
 import { changeArray } from "../../app/features/numbersSlice";
 import { useAppDispatch } from "../../app/hooks";
 import toast from "react-hot-toast";
+import { changeSize } from "../../app/features/configSlice";
 
 const CustomNumbers = () => {
     const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ const CustomNumbers = () => {
             return;
         }
 
+        dispatch(changeSize(array.length));
         dispatch(changeArray(array));
     };
 

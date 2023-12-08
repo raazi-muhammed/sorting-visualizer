@@ -49,6 +49,7 @@ const SortingVisualizer = () => {
     };
 
     const handleRandomClicked = (): void => {
+        isSortingStopped.current = true;
         const array = getRandomArray();
         dispatch(changeArray(array));
         dispatch(changeComparing([]));
